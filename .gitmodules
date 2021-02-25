@@ -1,3 +1,6 @@
 [submodule "PowershellTrojan"]
 	path = PowershellTrojan
 	url = https://github.com/s1131610/PowershellTrojan
+[submodule "YogaGuruRails"]
+	path = YogaGuruRails
+	url = https://cssegit.monmouth.edu/s1191114/yoga_guru_rails
