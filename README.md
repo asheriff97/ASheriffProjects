@@ -1,6 +1,9 @@
 ## Alex Sheriff's Projects
 The following are a list of notable projects that I have completed during my stay at Monmouth University.
 
+### Length of Stay Hospital Project
+This project was part of my Graduate Assistantship at Monmouth University as I was studying for my M.S. in Software Engineering. The general purpose is to use Machine Learning models to predict how many days a patient would stay at a hospital based on criteria like APR DRG Code, CCS Diagnostic Code, CCS Procedure Code, and others. I researched and applied concepts like Undersampling, Oversampling, SMOTE, One Hot Encoding, and Feature Analysis to achieve an 76% accuracy with a Random Forest Tree Supervised learning model. Other models used include Logistic Regression, Decision Tree, Ada Boost, and Gradient Boost. With the guidance of my supervisor, we were able to publish a technical report detailing our findings.
+
 ### Powershell Trojan
 This is a project I worked on with a partner in my CyberSecurity class at Monmouth University. The general idea is that we send an email to a individual containing a .exe file. This file takes you to a website with a cookie recipe, and in the background writes a .cmd file to your OS Startup folder. Next time you restart or turn on your computer, a pop-up will occur displaying "You're a Jerk" which you'll have to click through 6 times before it goes away. Although very simple, it demonstrates how invasive a simple program could be. A demonstration of how this Trojan works can be found [here](https://www.youtube.com/watch?v=YMx90HvHN9Y&feature=emb_logo), furthermore a technical report and presentation powerpoint can be found in the project folder.
 
