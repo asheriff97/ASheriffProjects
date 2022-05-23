@@ -20,7 +20,7 @@ selcols = ['APR DRG Code','APR Severity of Illness Code', 'CCS Diagnosis Code', 
 sample_size=200000
 training_size=int(0.8*sample_size)
 
-df=pandas.read_csv("LOS.csv", usecols=selcols, nrows=sample_size)    #df -data frame
+df=pandas.read_csv("LOS200k.csv", usecols=selcols, nrows=sample_size)    #df -data frame
 
 #target -- LOS
 y = df['Length of Stay'].replace("120 +", 120)

@@ -47,9 +47,10 @@ def dataPreprocessing(X, y):
 #################################
 def grouping(sample_size, y, grp): 
     for i in range(sample_size): 
-        value = y[i] #[i-1] Because we drop 1 row with a null value when assigning X dataframe
+        value = y[i] 
         if value < grp[0]:
             y[i] = 0
+        #Uncomment two lines below to test 3 groups
         elif value <grp[1]:
             y[i] = 1
         else:

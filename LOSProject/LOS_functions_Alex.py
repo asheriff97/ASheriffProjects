@@ -82,6 +82,7 @@ def grouping(sample_size, y, grp):
         value = y[i]
         if value < grp[0]:
             y[i] = 0
+        #Uncomment two lines below to test 3 groups
         elif value <grp[1]:
             y[i] = 1
         else:

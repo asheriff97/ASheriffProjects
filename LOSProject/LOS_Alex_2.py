@@ -16,7 +16,9 @@ selcols = ['APR DRG Code',  'APR Severity of Illness Code', 'APR Risk of Mortali
 sample_size=200000
 training_size=int(0.8*sample_size)
 
-df=pandas.read_csv("LOS.csv", usecols=selcols, nrows=sample_size)    #df -data frame
+
+df=pandas.read_csv("LOS200k.csv", usecols=selcols, nrows=sample_size)    #df -data frame
+
 
 #target -- LOS
 y = df['Length of Stay'].replace("120 +", 120)
@@ -46,8 +48,9 @@ print("\n-------Training and testing results-------")
 
 grp = [4,8]
 
-
+#To switch from 2 to 3 groups open LOS_functions.py and see grouping def
 LOS_functions.grouping(df.shape[0], y, grp)
+
 
 #LOS_functions.logisticRegression(X_train, y_train, X_test, y_test)
 #for x in range(5):

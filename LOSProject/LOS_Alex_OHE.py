@@ -19,7 +19,7 @@ selcols = ['APR DRG Code', 'APR Severity of Illness Code', 'APR Risk of Mortalit
 sample_size=200000
 training_size=int(0.8*sample_size)
 
-df=pd.read_csv("LOS.csv", usecols=selcols, nrows=sample_size, delimiter=',')    #df -data frame
+df=pd.read_csv("LOS200k.csv", usecols=selcols, nrows=sample_size, delimiter=',')    #df -data frame
 
 df = df.loc[df['APR Risk of Mortality'].notna(), selcols] #Takes all columns, ignores null values of Risk of Mortality
 
@@ -71,7 +71,7 @@ X_train, y_train, X_test, y_test = LOS_functions_OHE.dataPreprocessing(X, y)
 
 grp = [4,8]
 
-
+#To switch from 2 to 3 groups open LOS_functions.py and see grouping def
 LOS_functions_OHE.grouping(int(df.shape[0]*.2), y_test, grp)
 LOS_functions_OHE.grouping(int(df.shape[0]*.8), y_train, grp)
 print("Training Shape:")

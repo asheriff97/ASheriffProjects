@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}RecipeAPI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('ingredient_all') }}">All Ingredients</a>
+        <a href="{{ url_for('recipe_all') }}">All Recipes</a>
+        <a href="{{ url_for('recipe_filter') }}">Filter Recipes</a>
+    </nav>
+    <hr>
+    <h1>FILTER BY RECIPE'S INGREDIENT</h1>
+    <p>This page is used to filter recipes by ingredient</p>
+    <p>For example, if you search for "Bread" you will see all the recipes that contain Bread </p>
+    <p>If you dont know how many ingredients are available to view, you can check out "All Ingredients" above</p>
+    <p>Example http://127.0.0.1:5000/api/ingredients?ingredient_name=Bread to filter all recipes that include Bread as an ingredient</p>
+
+        <form name="filter" method="get">
+            <input type="text" placeholder="Ingredient name" name="ingredient_name"> 
+            <button type="submit" font-size: 10px></button> 
+        </form>
+</body>
+</html>
