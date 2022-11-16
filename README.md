@@ -19,6 +19,9 @@ This is a project I worked on with a partner in my CyberSecurity class at Monmou
 ### Grass Treatment Requirements Document
 This is a document I created with partners during my sophomore year at Monmouth University. The document is based off a hypothetical website for a dance group called "Grass Treatment". It includes exhaustive use-cases and functional/non-functional requirements as well as many other details. 
 
+### Ensuring Your Software is Reliable pdf
+This is a research paper I wrote for my Real-Time Systems class at Monmouth University. It is an exhaustive paper explaining what "reliability" means in the context of software, and the best practices for ensuring your software is reliable.
+
 ### Idle Adventure Mockup
 Idle Adventure is a mobile game concept. Designed in Adobe XD, this was my first experience designing an app in Adobe XD. A functional product does not exist. "Idle Adventure is a game concept created by Alex Sheriff for his SE-402 Class at Monmouth University. You can gather supplies to upgrade your party members, and send those party members out on quests. Furthermore, as you are playing you will be subjected to "encounters" which will give you an opportunity to gain more supply, or lose some. Have fun!" (Taken from the 'Game Statistics' Panel)
 
