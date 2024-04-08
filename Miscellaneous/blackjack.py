@@ -18,60 +18,53 @@ random.shuffle(deck)
 player_card = [deck.pop(), deck.pop()]
 dealer_card = [deck.pop(), deck.pop()]
 
+
 while True:
     player_score = sum(card_value(card) for card in player_card)
     dealer_score = sum(card_value(card) for card in dealer_card)
     print("Cards Player Has:", player_card)
     print("Score Of The Player:", player_score)
     print("\n")
-    choice = input('What do you want? ["play" to request another card, "stop" to stop]: ').lower()
-    if choice == "play":
+    
+    if player_score >= 21:
+        break       
+
+    choice = input('What do you want? ["hit" to request another card, "stand" to stop]: ').lower()
+    if choice == "hit":
         new_card = deck.pop()
         player_card.append(new_card)
-    elif choice == "stop":
+    elif choice == "stand":
         break
     else:
         print("Invalid choice. Please try again.")
-        continue
 
-    if player_score > 21:
-        print("Cards Dealer Has:", dealer_card)
-        print("Score Of The Dealer:", dealer_score)
-        print("Cards Player Has:", player_card)
-        print("Score Of The Player:", player_score)
-        print("Dealer wins (Player Loss Because Player Score is exceeding 21)")
-        break
+    
 
-while dealer_score < 17:
+while dealer_score <= 17:
     new_card = deck.pop()
     dealer_card.append(new_card)
     dealer_score += card_value(new_card)
 
-print("Cards Dealer Has:", dealer_card)
+print("\nCards Dealer Has:", dealer_card)
 print("Score Of The Dealer:", dealer_score)
-print("\n")
+print("Cards Player Has:", player_card)
+print("Score Of The Player:", player_score,"\n")
 
-if dealer_score > 21:
-    print("Cards Dealer Has:", dealer_card)
-    print("Score Of The Dealer:", dealer_score)
-    print("Cards Player Has:", player_card)
-    print("Score Of The Player:", player_score)
-    print("Player wins (Dealer Loss Because Dealer Score is exceeding 21)")
+if (player_score == 21 and dealer_score != 21):
+    print("BLACKJACK! Player wins!")
+elif player_score > 21:
+    print("BUST! Player loses!")
+    #break
+elif dealer_score > 21:
+    print("DEALER BUST! Player wins!!!")
+    #break
 elif player_score > dealer_score:
-    print("Cards Dealer Has:", dealer_card)
-    print("Score Of The Dealer:", dealer_score)
-    print("Cards Player Has:", player_card)
-    print("Score Of The Player:", player_score)
     print("Player wins (Player Has High Score than Dealer)")
+    #break
 elif dealer_score > player_score:
-    print("Cards Dealer Has:", dealer_card)
-    print("Score Of The Dealer:", dealer_score)
-    print("Cards Player Has:", player_card)
-    print("Score Of The Player:", player_score)
     print("Dealer wins (Dealer Has High Score than Player)")
+    #break
 else:
-    print("Cards Dealer Has:", dealer_card)
-    print("Score Of The Dealer:", dealer_score)
-    print("Cards Player Has:", player_card)
-    print("Score Of The Player:", player_score)
     print("It's a tie.")
+    #break
+
