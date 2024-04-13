@@ -17,6 +17,24 @@ MODERATE
  - Add a play again option DONE
  - Need to make a check to see if player automatically wins with a blackjack, they do not get option to hit/dd/stand etc.
 
+ - What do you want? ["hit" to request another card, "dd" to double-down, or "stand" to stop]: stand
+Dealer turns their second card over to reveal a ('Ace', 'Spades')
+Dealer unveils a ('Ace', 'Diamonds')
+Dealer unveils a ('10', 'Diamonds')
+Dealer unveils a ('9', 'Diamonds')
+Dealer unveils a ('King', 'Diamonds')
+Dealer unveils a ('Queen', 'Spades')
+Dealer unveils a ('7', 'Spades')
+
+Dealer's Hand: [('2', 'Spades'), ('Ace', 'Spades'), ('Ace', 'Diamonds'), ('10', 'Diamonds'), ('9', 'Diamonds'), 
+('King', 'Diamonds'), ('Queen', 'Spades'), ('7', 'Spades')]
+Dealer's Score: 20
+Player's Hand: [('Ace', 'Hearts'), ('6', 'Clubs')]
+Player's Score: 17
+
+Dealer wins (Dealer Has Higher Score than Player)
+You lost. Your balance is now $900.
+
 MINOR
  - Fix the vocabulary (Stand/Hit) DONE
  - Add line spaces BETTER

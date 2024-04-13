@@ -1,7 +1,7 @@
-#Building Blackjack in Python LABORATORY
-#I mess around in here before adding to the main file.
+#Building Blackjack in Python
 
 import random
+import time
 from BJFuncs import *
 
 player_balance = 1000
@@ -11,6 +11,7 @@ while True:
     #double_down = False
     tie = False
     deck = create_deck()
+    card_count = 0
     random.shuffle(deck)
     player_card = [deck.pop(), deck.pop()]
     dealer_card = [deck.pop(), deck.pop()]
@@ -23,44 +24,62 @@ while True:
         print("You cannot bet more than your current balance.")
         continue
 
-    print("\nCards Dealer Has:", dealer_card)
-    print("Score Of The Dealer:", dealer_score)
-    while player_score <= 21:
+    print("\nDealer's Hand: {} [Hidden]".format(dealer_card[0]))
+    #print("Score Of The Dealer:", dealer_score)
+    while player_score < 21:
 
-        print("Cards Player Has:", player_card)
-        print("Score Of The Player:", player_score)
+        print("Player's Hand:", player_card)
+        print("Player's Score:", player_score)
         print("\n")
 
         choice = input('What do you want? ["hit" to request another card, "dd" to double-down, or "stand" to stop]: ').lower()
         if (choice == "hit" or choice == "dd"): #You can only double down on the first hand. Need to make a check so you cant double down after the first hand.
+            card_count += 1
             new_card = deck.pop()
             player_card.append(new_card)
             player_score += card_value(new_card)
             player_score = adjust_score_for_ace(player_card, player_score)
-            if choice == "dd":
+            if (choice == "dd" and card_count == 1):
                 bet *= 2
                 if bet > player_balance:
                     print("You do not have enough balance to double down.")
                     bet /= 2
                 else:
                     print("Your bet is now ${}.".format(bet))
-                    #double_down = True
-                    break
+                    print("Player's Hand:", player_card)
+                    print("Player's Score:", player_score)
+                    print("\n")
+                    break #Only dealt one more card, so we break out of the loop
+            elif(choice == "dd" and card_count > 1):
+                print("You can only double down on on a two-card hand. You hit.\n")
         elif choice == "stand":
             break
         else:
             print("Invalid choice. Please try again.")
 
+    time.sleep(1)
+    print("Dealer turns their second card over to reveal a {}".format(dealer_card[1]))
     while dealer_score < 17:
-        new_card = deck.pop()
-        dealer_card.append(new_card)
-        dealer_score += card_value(new_card)
-        dealer_score = adjust_score_for_ace(dealer_card, dealer_score)
+        if player_score >= 21:
+            break
+        else:
+            time.sleep(2)
+            new_card = deck.pop()
+            dealer_card.append(new_card)
+            dealer_score += card_value(new_card)
+            dealer_score = adjust_score_for_ace(dealer_card, dealer_score)
+            print("Dealer unveils a {}".format(new_card))
 
-    print("\nCards Dealer Has:", dealer_card)
-    print("Score Of The Dealer:", dealer_score)
-    print("Cards Player Has:", player_card)
-    print("Score Of The Player:", player_score,"\n")
+   # print("\n")
+   # for card in dealer_card:
+   #     time.sleep(2)
+   #     print("Dealer unveils a {}".format(card))
+
+    time.sleep(2)
+    print("\nDealer's Hand:", dealer_card)
+    print("Dealer's Score:", dealer_score)
+    print("Player's Hand:", player_card)
+    print("Player's Score:", player_score,"\n")
 
     #Determine the winner of the game
     if (player_score == 21 and dealer_score != 21): #Win (BlackJack)
