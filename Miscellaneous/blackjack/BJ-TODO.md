@@ -40,6 +40,8 @@ MINOR
  - Add line spaces BETTER
  - Clean up final if/else win prompt DONE(?)
  - Improve readability BETTER
- - Combine score functions into one large function
+ - Make an option to slowly reveal the dealer's hand DONE
+ - Combine score functions into one large function DONE
+
 
 "After the boxes have finished playing, the dealer's hand is resolved by drawing cards until the hand achieves a total of 17 or higher. If the dealer has a total of 17 including an ace valued as 11 (a "soft 17"), some games require the dealer to stand while other games require another draw. The dealer never doubles, splits, or surrenders. If the dealer busts, all remaining player hands win. If the dealer does not bust, each remaining bet wins if its hand is higher than the dealer's and loses if it is lower."

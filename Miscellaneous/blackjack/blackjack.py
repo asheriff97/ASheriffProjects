@@ -25,7 +25,7 @@ while True:
         continue
 
     print("\nDealer's Hand: {} [Hidden]".format(dealer_card[0]))
-    #print("Score Of The Dealer:", dealer_score)
+
     while player_score < 21:
 
         print("Player's Hand:", player_card)
@@ -37,8 +37,7 @@ while True:
             card_count += 1
             new_card = deck.pop()
             player_card.append(new_card)
-            player_score += card_value(new_card)
-            player_score = adjust_score_for_ace(player_card, player_score)
+            player_score = adjust_score_for_ace(player_card, sum(card_value(card) for card in player_card))
             if (choice == "dd" and card_count == 1):
                 bet *= 2
                 if bet > player_balance:
@@ -57,25 +56,20 @@ while True:
         else:
             print("Invalid choice. Please try again.")
 
-    time.sleep(1)
-    print("Dealer turns their second card over to reveal a {}".format(dealer_card[1]))
-    while dealer_score < 17:
-        if player_score >= 21:
-            break
-        else:
+
+    if player_score >= 21: #We skip dealers turn if player blackjacks or busts on their turn
+        pass
+    else: 
+        time.sleep(1)
+        print("Dealer turns their second card over to reveal a {}".format(dealer_card[1]))
+        while dealer_score < 17:
             time.sleep(2)
             new_card = deck.pop()
             dealer_card.append(new_card)
-            dealer_score += card_value(new_card)
-            dealer_score = adjust_score_for_ace(dealer_card, dealer_score)
+            dealer_score = adjust_score_for_ace(dealer_card, sum(card_value(card) for card in dealer_card))
             print("Dealer unveils a {}".format(new_card))
 
-   # print("\n")
-   # for card in dealer_card:
-   #     time.sleep(2)
-   #     print("Dealer unveils a {}".format(card))
-
-    time.sleep(2)
+    time.sleep(1)
     print("\nDealer's Hand:", dealer_card)
     print("Dealer's Score:", dealer_score)
     print("Player's Hand:", player_card)
@@ -118,5 +112,10 @@ while True:
 
     new_game = input("\nDo you want to play again? (yes/no) ").lower()
     if new_game != 'yes':
+        print("Thanks for playing. Your final balance is ${}.".format(player_balance))
+        if player_balance > 1000:
+            print("You walked away with an extra ${}".format(player_balance - 1000), "in your pocket!")
+        else:
+            print("You lost ${}".format(1000 - player_balance), "of your money. Better luck next time!")
         break
 
