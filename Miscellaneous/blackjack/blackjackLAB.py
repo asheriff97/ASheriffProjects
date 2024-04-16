@@ -1,15 +1,17 @@
 #Building Blackjack in Python LABORATORY
 #I mess around in here before adding to the main file.
+from ast import Continue
 import random
 import time
-from BJFuncs import *
+from BJFuncs import create_deck, card_value, adjust_score_for_ace, players_turn, split_hand
+
 
 player_balance = 1000
 
 while True:
     player_wins = False
     tie = False
-    
+    split = False
 	#deck = create_deck()
     deck = [('6', 'Hearts'), ('10', 'Diamonds'), ('4', 'Clubs'), ('6', 'Spades'), ('9', 'Diamonds'),
              ('King', 'Clubs'), ('4', 'Diamonds'), ('4', 'Hearts')]
@@ -21,6 +23,11 @@ while True:
     player_score = adjust_score_for_ace(player_card, sum(card_value(card) for card in player_card))
     dealer_score = adjust_score_for_ace(dealer_card, sum(card_value(card) for card in dealer_card))
 
+    #If Dealer has a blackjack immediately, we re-deal everyones hands
+    if dealer_score == 21:
+        print("Dealer has a blackjack. Re-dealing hands.")
+        continue
+
     bet = int(input(f"Your balance is ${player_balance}. How much do you want to bet? \n")) #need to add input validation so game doesnt break on non-int
     if bet > player_balance:
         print("You cannot bet more than your current balance.")
@@ -31,57 +38,14 @@ while True:
 
 	#CHECK IF SPLITTING IS POSSIBLE
     if (player_card[0][0] == player_card[1][0]): #If the first two cards are the same, ask if the player wants to split
-        split = input("You have two {}s. Do you want to split? (yes/no) ".format(player_card[0][0])).lower() #need to add input validation
-        if split == "yes": #If the player wants to split, we create two hands and deal a card to each hand
-            print("You split your hand.")
-            player_card1 = [player_card[0], deck.pop()]
-            player_card2 = [player_card[1], deck.pop()]
-            player_score1 = adjust_score_for_ace(player_card1, sum(card_value(card) for card in player_card1))
-            player_score2 = adjust_score_for_ace(player_card2, sum(card_value(card) for card in player_card2))
-            print("Player's Hand 1:", player_card1)
-            print("Player's Score 1:", player_score1)
-            print("Player's Hand 2:", player_card2)
-            print("Player's Score 2:", player_score2)
-            print("\n")
-            while True:
-                choice = input('What do you want to do with hand 1? ["hit" to request another card, or "stand" to stop]: ').lower()
-                if choice == "hit":
-                    card_count += 1
-                    new_card = deck.pop()
-                    player_card1.append(new_card)
-                    player_score1 = adjust_score_for_ace(player_card1, sum(card_value(card) for card in player_card1))
-                    print("Player's Hand 1:", player_card1)
-                    print("Player's Score 1:", player_score1)
-                    print("\n")
-
-    while player_score < 21:
-        print("Player's Hand:", player_card)
-        print("Player's Score:", player_score)
-        print("\n")
-
-        choice = input('What do you want? ["hit" to request another card, "dd" to double-down, or "stand" to stop]: ').lower()
-        if (choice == "hit" or choice == "dd"): #You can only double down on the first hand. Need to make a check so you cant double down after the first hand.
-            card_count += 1
-            new_card = deck.pop()
-            player_card.append(new_card)
-            player_score = adjust_score_for_ace(player_card, sum(card_value(card) for card in player_card))
-            if (choice == "dd" and card_count == 1):
-                bet *= 2
-                if bet > player_balance:
-                    print("You do not have enough balance to double down.")
-                    bet /= 2
-                else:
-                    print("Your bet is now ${}.".format(bet))
-                    print("Player's Hand:", player_card)
-                    print("Player's Score:", player_score)
-                    print("\n")
-                    break #Only dealt one more card, so we break out of the loop
-            elif(choice == "dd" and card_count > 1):
-                print("You can only double down on on a two-card hand. You hit.\n")
-        elif choice == "stand":
-            break
+        response = input("You have two {}s. Do you want to split? (yes/no) ".format(player_card[0][0])).lower() #need to add input validation
+        if response == "yes": #If the player wants to split, we create two hands and deal a card to each hand
+            player_card1, player_card2, player_score1, player_score2, card_count, bet, player_balance, split = split_hand(player_card, deck, card_count, bet, player_balance) 
         else:
-            print("Invalid choice. Please try again.")
+            player_card, player_score, card_count, bet, player_balance = players_turn(player_card, deck, card_count, player_score, bet, player_balance, split=False) 
+    
+    print("OUT OF LOOP") #TESTING
+    print(player_card1, player_card2, player_score1, player_score2, card_count, bet, player_balance, split) #TESTING
 
 
     if player_score >= 21: #We skip dealers turn if player blackjacks or busts on their turn
