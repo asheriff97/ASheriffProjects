@@ -2,8 +2,9 @@
 
 import random
 import time
-from BJFuncs import *
+from BJFuncs import create_deck, card_value, adjust_score_for_ace
 
+print("Welcome to Blackjack! *This version does not include splitting or insurance.")
 player_balance = 1000
 
 while True:
