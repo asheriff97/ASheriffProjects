@@ -32,7 +32,18 @@ MINOR
  - Improve readability BETTER
  - Make an option to slowly reveal the dealer's hand DONE
  - Combine score functions into one large function DONE
- - Add a way to check to see if Dealer has blackjack with starting hand, the turn is void and the player gets their money back DONE
+
+
+ BET PAYOUTS
+ - If Deck <=2 Payout is 1.2x
+ - If Deck >=3 Payout is 1.5x
+ - Insurance Payout is 2x
+ If Player has blackjack, and want to place insurance, total bet is 1x
+    Player skips the rest of their turn
+
+
+
+
 
 
 "After the boxes have finished playing, the dealer's hand is resolved by drawing cards until the hand achieves a total of 17 or higher. If the dealer has a total of 17 including an ace valued as 11 (a "soft 17"), some games require the dealer to stand while other games require another draw. The dealer never doubles, splits, or surrenders. If the dealer busts, all remaining player hands win. If the dealer does not bust, each remaining bet wins if its hand is higher than the dealer's and loses if it is lower."

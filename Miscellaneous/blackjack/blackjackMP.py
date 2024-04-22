@@ -6,10 +6,11 @@ from BJMPFuncs import *
 print("Welcome to Multiplayer Blackjack!")
 
 player_count = int(input("How many players are there? ")) #Need to make ability for players to cash out before game is over
+deck_count = int(input("How many decks would you like to play with? (1-8)")) #Need to input validate
 
 players = create_players(player_count)  
 
-deck = create_deck()
+deck = create_deck(deck_count)
 random.shuffle(deck)
 dealer_hand = []
 

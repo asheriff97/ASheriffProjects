@@ -12,11 +12,15 @@ while True:
     player_wins = False
     tie = False
     split = False
-	#deck = create_deck()
-    deck = [('6', 'Hearts'), ('10', 'Diamonds'), ('4', 'Clubs'), ('6', 'Spades'), ('9', 'Diamonds'),
-             ('King', 'Clubs'), ('4', 'Diamonds'), ('4', 'Hearts')]
+    count = int(input("How many decks would you like to play with? (1-8) "))
+    deck = create_deck(count)
+
+    #deck = [('6', 'Hearts'), ('10', 'Diamonds'), ('4', 'Clubs'), ('6', 'Spades'), ('9', 'Diamonds'),
+    #         ('King', 'Clubs'), ('4', 'Diamonds'), ('4', 'Hearts')]
+
     card_count = 0
     #random.shuffle(deck)
+    print(deck)
 	
     player_card = [deck.pop(), deck.pop()]
     dealer_card = [deck.pop(), deck.pop()]
