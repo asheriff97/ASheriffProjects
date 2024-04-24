@@ -1,16 +1,13 @@
 #Functions
 
-def create_deck(count):
+def create_deck():
     """
     Creates a deck of 52 cards, with each card being a tuple of the form (card, category).
     """
     card_categories = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
     card_list = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King']
-    #Return count number of decks
-    deck = []
-    for i in range(count):
-        deck += [(card, category) for category in card_categories for card in card_list]
-    return deck
+
+    return [(card, category) for category in card_categories for card in card_list]
 
 def card_value(card):
     """

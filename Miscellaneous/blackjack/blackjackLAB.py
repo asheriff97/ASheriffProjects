@@ -12,8 +12,7 @@ while True:
     player_wins = False
     tie = False
     split = False
-    count = int(input("How many decks would you like to play with? (1-8) "))
-    deck = create_deck(count)
+    deck = create_deck()
 
     #deck = [('6', 'Hearts'), ('10', 'Diamonds'), ('4', 'Clubs'), ('6', 'Spades'), ('9', 'Diamonds'),
     #         ('King', 'Clubs'), ('4', 'Diamonds'), ('4', 'Hearts')]
