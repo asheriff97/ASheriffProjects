@@ -37,7 +37,7 @@ def create_players(count):
     players = []
     for i in range(count): 
         player_name = input(f"Enter player {i+1}'s name: ")
-        players.append({"name": player_name, "balance": 1000, "hands": [[]], "bets": [0]})
+        players.append({"name": player_name, "player_score": [], "balance": 1000, "hands": [[]], "bets": [0], "nat_bj": False, "split": False})
     return players
 
 def place_bets(players):
@@ -75,19 +75,25 @@ def deal_initial_hands(deck, players, dealer_hand):
         for hand in player["hands"]:
             hand.extend([deck.pop(), deck.pop()])
             '''
+
 def player_turn(players, deck):
     for index, hand in enumerate(players["hands"]):
+        print("Player: " + players["name"] + "'s turn. We detect that you have " + str(len(players["hands"])) + " hands.")
         #First check if split is possible
         print(players["name"] + "'s hand: ", hand)
         if hand[0][0] == hand[1][0]: #If the first two cards are the same
             split = input("Would you like to split your hand? (y/n)")
-            if split == 'y':
+            if (split == 'y' and players["balance"] >= players["bets"][index]): #If the player wants to split and has enough money to do so
                 players["hands"].append([hand.pop(), deck.pop()]) #Add a new hand with the second card of the first hand
                 hand.append(deck.pop()) #Add a new card to the first hand
+                players["bets"].append(players["bets"][index]) #The new hand has the same bet as the first hand
+                print(players["bets"]) #Testing
                 print("First hand: ", hand) #Testing
                 print("Second hand: ", players["hands"][index+1]) #Testing
-            else: #If the player doesn't want to split
+            elif (split == 'y' and players["balance"] < players["bets"][index]): #
+                print("You don't have enough money to split your hand.")
                 print("Your hand: ", hand) #Testing
+        
 
 def dealer_turn(dealer_card, dealer_score, deck):
     print("Dealer turns their second card over to reveal a {}".format(dealer_card[1]))
