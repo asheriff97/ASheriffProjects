@@ -78,21 +78,63 @@ def deal_initial_hands(deck, players, dealer_hand):
 
 def player_turn(players, deck):
     for index, hand in enumerate(players["hands"]):
+        card_count = 0
         print("Player: " + players["name"] + "'s turn. We detect that you have " + str(len(players["hands"])) + " hands.")
         #First check if split is possible
         print(players["name"] + "'s hand: ", hand)
-        if hand[0][0] == hand[1][0]: #If the first two cards are the same
-            split = input("Would you like to split your hand? (y/n)")
-            if (split == 'y' and players["balance"] >= players["bets"][index]): #If the player wants to split and has enough money to do so
-                players["hands"].append([hand.pop(), deck.pop()]) #Add a new hand with the second card of the first hand
-                hand.append(deck.pop()) #Add a new card to the first hand
-                players["bets"].append(players["bets"][index]) #The new hand has the same bet as the first hand
-                print(players["bets"]) #Testing
-                print("First hand: ", hand) #Testing
-                print("Second hand: ", players["hands"][index+1]) #Testing
-            elif (split == 'y' and players["balance"] < players["bets"][index]): #
-                print("You don't have enough money to split your hand.")
-                print("Your hand: ", hand) #Testing
+        split(players, deck, index, hand)
+        while players["player_score"] < 21: #While the player's score is less than 21
+            print(players["name"] + "'s hand: ", hand)
+            print([players["player_score"]])
+            choice = input('What do you want? ["h" to hit, "dd" to double-down, or "s" to stand]: ').lower()
+            if (choice == "hit" or choice == "dd"): #You can only double down on the first hand. Need to make a check so you cant double down after the first hand.
+                card_count += 1
+                new_card = deck.pop()
+                hand.append(new_card)
+                players["player_score"] = adjust_score_for_ace(hand, sum(card_value(card) for card in hand))
+                if (choice == "dd" and card_count == 1):
+                    players["bets"][index] *= 2
+                    if players["bets"][index] > players["balance"]: #I think this is wrong but we check later
+                        print("You do not have enough balance to double down.")
+                        players["bets"][index] /= 2
+                    else:
+                        print("Your bet is now ${}.".format(players["bets"][index]))
+                        print("Player's Hand:", hand)
+                        print("Player's Hand Score:", players["player_score"])
+                        print("\n")
+                        break #Only dealt one more card, so we break out of the loop
+                elif(choice == "dd" and card_count > 1):
+                    print("You can only double down on on a two-card hand. You hit.\n")
+            elif choice == "stand":
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+def split(players, deck, index, hand):
+    if hand[0][0] == hand[1][0]: #If the first two cards are the same
+        split = input("Would you like to split your hand? (y/n)")
+        if (split == 'y' and players["balance"] >= players["bets"][index]): #If the player wants to split and has enough money to do so
+            players["hands"].append([hand.pop(), deck.pop()]) #Add a new hand with the second card of the first hand
+            hand.append(deck.pop()) #Add a new card to the first hand
+            players["bets"].append(players["bets"][index]) #The new hand has the same bet as the first hand
+            print(players["bets"]) #Testing
+            print("First hand: ", hand) #Testing
+            print("Second hand: ", players["hands"][index+1]) #Testing
+        elif (split == 'y' and players["balance"] < players["bets"][index]): #
+            print("You don't have enough money to split your hand.")
+            print("Your hand: ", hand) #Testing
+        elif (split == 'n'):
+            pass
+        else:
+            print("Something went wrong. LINE 100")
+
+
+
+    
+
+
+
+
         
 
 def dealer_turn(dealer_card, dealer_score, deck):
