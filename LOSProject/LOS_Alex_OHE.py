@@ -19,7 +19,7 @@ selcols = ['APR DRG Code', 'APR Severity of Illness Code', 'APR Risk of Mortalit
 sample_size=200000
 training_size=int(0.8*sample_size)
 
-df=pd.read_csv("LOS200k.csv", usecols=selcols, nrows=sample_size, delimiter=',')    #df -data frame
+df=pd.read_csv("/Users/Alex/myprojects/ASheriffProjects/LOSProject/LOS200k.csv", usecols=selcols, nrows=sample_size, delimiter=',')    #df -data frame
 
 df = df.loc[df['APR Risk of Mortality'].notna(), selcols] #Takes all columns, ignores null values of Risk of Mortality
 
